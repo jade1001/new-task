@@ -14,10 +14,10 @@ import org.springframework.stereotype.Service
 @Service
 class UserPHService(private val rpc: NodeRPCConnection): IUserServicePH
 {
-    override fun get(linearId: String): Any
+    override fun get(name: String): Any
     {
         val userStateRef = rpc.proxy.vaultQuery(UserPHState::class.java).states
-        val userState = userStateRef.find { it.state.data.linearId.toString() == linearId }
+        val userState = userStateRef.find { it.state.data.name == name }
                 ?: throw NotFoundException("User not found")
         return mapToUserPHDTO(userState.state.data)
     }

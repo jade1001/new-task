@@ -5,11 +5,11 @@ import com.template.dto.*
 interface IUserServicePH
 {
     fun registerUserPH(request: UserPHFlowDTO): UserPHDTO
-    fun get(linearId: String): Any
+    fun get(name: String): Any
 }
 
 interface IUserServiceJP
 {
     fun registerUserJP(request: UserJPFlowDTO): UserJPDTO
-    fun get(linearId: String): Any
+    fun get(name: String): Any
 }

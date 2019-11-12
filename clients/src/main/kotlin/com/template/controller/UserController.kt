@@ -21,11 +21,11 @@ class UserController(private val userServicePH: IUserServicePH,
 /**
  * Get user by linear id
  */
-@GetMapping(value = ["/PH/{linearId}"], produces = ["application/json"])
-private fun getUserPHByLinearId(@PathVariable linearId: String): ResponseEntity<Any>
+@GetMapping(value = ["/PH/{name}"], produces = ["application/json"])
+private fun getUserPHByLinearId(@PathVariable name: String): ResponseEntity<Any>
 {
     return try {
-        val response = userServicePH.get(linearId)
+        val response = userServicePH.get(name)
         ResponseEntity.ok(response)
     } catch (e: Exception) {
         this.handleException(e)
@@ -54,11 +54,11 @@ private fun createUserPH(@RequestBody request: UserPHFlowDTO): ResponseEntity<An
     /**
      * Get user by linear id
      */
-    @GetMapping(value = ["/JP/{linearId}"], produces = ["application/json"])
-    private fun getUserJPByLinearId(@PathVariable linearId: String): ResponseEntity<Any>
+    @GetMapping(value = ["/JP/{name}"], produces = ["application/json"])
+    private fun getUserJPByLinearId(@PathVariable name: String): ResponseEntity<Any>
     {
         return try {
-            val response = userServiceJP.get(linearId)
+            val response = userServiceJP.get(name)
             ResponseEntity.ok(response)
         } catch (e: Exception) {
             this.handleException(e)

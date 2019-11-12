@@ -24,7 +24,18 @@ class UserPHFlow(private val name: String) : FlowFunctions(){
         if (ourIdentity == stringToParty("BankJP"))
             throw IllegalArgumentException("BankJP cannot register a new user")
 
-        return subFlow(FinalityFlow(verifyAndSign(transaction()), listOf()))
+        return if (getUserPHState().isEmpty()){
+            subFlow(FinalityFlow(verifyAndSign(transaction()), listOf()))
+        }
+        else {
+            if (getPH(name))
+            {
+                throw IllegalArgumentException("User already exists")
+            }
+            else{
+                subFlow(FinalityFlow(verifyAndSign(transaction()), listOf()))
+            }
+        }
     }
 
     private fun outState() : UserPHState
